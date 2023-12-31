@@ -12,23 +12,19 @@ import java.util.concurrent.CompletableFuture;
 @Log4j2
 @RequiredArgsConstructor
 public class StringProducerService {
-
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendMessage(String message) {
         CompletableFuture<SendResult<String, String>> completableFuture = kafkaTemplate.send("str-topic", message);
-
         completableFuture.whenComplete((result, ex) -> {
             if (ex != null) {
                 log.error("Error sending message: {}", ex.getMessage());
                 return;
             }
             log.info("Message sent successfully: {}", result.getProducerRecord().value());
-
             log.info("Partition {}, offset {}",
                     result.getRecordMetadata().partition(),
                     result.getRecordMetadata().offset());
         });
     }
-
 }

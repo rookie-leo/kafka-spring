@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/producer")
 @RequiredArgsConstructor
 public class StringProducerResource {
-
     private final StringProducerService service;
 
     @PostMapping

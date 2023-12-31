@@ -13,14 +13,12 @@ import java.util.HashMap;
 @Configuration
 @RequiredArgsConstructor
 public class KafkaAdminConfig {
-
     public final KafkaProperties properties;
 
     @Bean
     public KafkaAdmin kafkaAdmin() {
         var configs = new HashMap<String, Object>();
         configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getBootstrapServers());
-
         return new KafkaAdmin(configs);
     }
 

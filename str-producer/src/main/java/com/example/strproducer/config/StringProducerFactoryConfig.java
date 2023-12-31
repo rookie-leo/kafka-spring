@@ -15,7 +15,6 @@ import java.util.HashMap;
 @Configuration
 @RequiredArgsConstructor
 public class StringProducerFactoryConfig {
-
     private final KafkaProperties properties;
 
     @Bean
@@ -24,7 +23,6 @@ public class StringProducerFactoryConfig {
         configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getBootstrapServers());
         configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-
         return new DefaultKafkaProducerFactory<>(configs);
     }
 
@@ -32,5 +30,4 @@ public class StringProducerFactoryConfig {
     public KafkaTemplate<String, String> kafkaTemplate(ProducerFactory<String, String> producerFactory) {
         return new KafkaTemplate<>(producerFactory);
     }
-
 }
